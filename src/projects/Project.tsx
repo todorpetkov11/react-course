@@ -1,4 +1,3 @@
-import ProjectForm from "./ProjectForm";
 import ProjectInterface from "./ProjectInterface";
 
 interface ProjectProps {
@@ -16,6 +15,7 @@ function Project(props: ProjectProps) {
     const handleEditClick = (projectEdited: ProjectInterface) => {
         onEdit(projectEdited)
     };
+
     const { project, onEdit } = props;
     return (
         <div>
@@ -36,7 +36,6 @@ function Project(props: ProjectProps) {
                     Edit
                 </button>
             </div>
-            <ProjectForm />
         </div>
 
 

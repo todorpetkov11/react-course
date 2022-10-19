@@ -3,19 +3,44 @@ import ProjectList from './projects/ProjectList';
 import Clock from './projects/Time';
 import DataLoad from './projects/DataLoad';
 import data from './projects/data';
+import ProjectInterface from './projects/ProjectInterface';
+import ExampleForm from './forms/ExampleFrom';
+import { useEffect, useState } from 'react';
 
 
-interface AppProps {
-  name: string
-}
+function App() {
 
-function App(props: AppProps) {
+  const [items, setItems] = useState<Array<ProjectInterface>>([])
+
+  useEffect(() => setItems(data), [])
+
+  const addProject = (item: ProjectInterface) => {
+    setItems([...items, item])
+  }
+
+  const saveProject = (project: ProjectInterface) => {
+    items.push(project)
+    console.log(items)
+  }
+
+  const updateProject = (project: ProjectInterface) => {
+    let updatedProjects = items.map((item) => {
+      return item.id === project.id ?
+        Object.assign({}, item, project)
+        : item;
+    });
+    return setItems(updatedProjects)
+  }
+
+  const removeProject = (project: ProjectInterface) => {
+    const filteredItems = items.filter((item) => item.id != project.id);
+    setItems(filteredItems)
+  }
+
   return (
     <div>
       <h1>Projects:</h1>
-      <ProjectList projects={data} />
-      <DataLoad />
-      <Clock />
+      <ProjectList onAdd={addProject} onRemove={removeProject} onSave={saveProject} onUpdate={updateProject} projects={items} />
     </div>
 
   );

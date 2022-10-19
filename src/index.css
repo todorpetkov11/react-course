@@ -12,6 +12,6 @@ code {
     monospace;
 }
 
-form {
-  min-width: 300px;
+input, textarea, form {
+  width: 300px;
 }

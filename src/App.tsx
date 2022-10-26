@@ -16,11 +16,12 @@ function App() {
 
   const addProject = (item: ProjectInterface) => {
     setItems([...items, item])
+    console.log(items)
   }
 
   const saveProject = (project: ProjectInterface) => {
     items.push(project)
-    console.log(items)
+    
   }
 
   const updateProject = (project: ProjectInterface) => {
@@ -40,7 +41,7 @@ function App() {
   return (
     <div>
       <h1>Projects:</h1>
-      <ProjectList onAdd={addProject} onRemove={removeProject} onSave={saveProject} onUpdate={updateProject} projects={items} />
+      <ProjectList onAdd={saveProject} onRemove={removeProject} onSave={addProject} onUpdate={updateProject} projects={items} />
     </div>
 
   );
